@@ -53,7 +53,7 @@ mvn allure:serve
 ```
 
 ### Report Example
-<img width="1728" height="729" alt="Screenshot 2026-02-27 at 00 58 21" src="https://github.com/user-attachments/assets/6312c34f-000e-414f-adda-e6d8c9d8f604" />
+<img width="1637" height="626" alt="Screenshot 2026-02-27 at 01 27 52" src="https://github.com/user-attachments/assets/1d5591a5-4c08-4dbc-a409-c2cd5fa9f84b" />
 
 
 ## Logging
@@ -63,6 +63,7 @@ Each test generates its own log file under `logs/` directory:
 logs/PlayerCreatePositiveTest_shouldCreatePlayerAsSupervisor.log
 logs/PlayerUpdateNegativeTest_shouldFailWhenEditorIsRegularUser.log
 ```
+
 
 ## Known Bugs
 
