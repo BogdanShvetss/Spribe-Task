@@ -67,3 +67,25 @@ logs/PlayerUpdateNegativeTest_shouldFailWhenEditorIsRegularUser.log
 ## Known Bugs
 
 Many tests are disabled (`enabled = false`) because they cover confirmed bugs in the application. These tests are marked with the `@Issue` annotation describing the bug.
+
+## API Design Issues
+
+The application has incorrect HTTP method usage across endpoints:
+
+| Endpoint | Current Method | Expected Method |
+|---|---|---|
+| `/player/create/{editor}` | GET | POST |
+| `/player/delete/{editor}` | DELETE | DELETE ✅ |
+| `/player/get` | POST | GET |
+| `/player/get/all` | GET | GET ✅ |
+| `/player/update/{editor}/{id}` | PATCH | PATCH ✅ |
+
+Using `GET` for resource creation (`/player/create`) violates REST principles — `GET` requests should be read-only and must not change server state. Similarly, using `POST` for `/player/get` is semantically incorrect as it is a read operation.
+
+## Security Issue
+
+`/player/create/{editor}` sends all player fields including `password` as **query parameters** in the URL. This means:
+- Password is visible in server access logs
+- Password is stored in browser history
+
+Sensitive data like passwords should always be sent in the **request body**, never in the URL.
